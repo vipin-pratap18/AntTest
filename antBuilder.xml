@@ -1,0 +1,101 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="AntTest.makejar" default="main" basedir=".">
+
+	<!-- Working Model -->
+	<!--
+	<target name="resolve" description=" retrieve dependencies with ivy">
+	        <ivy:retrieve />
+	</target>
+	
+	<target name = "compile" depends = "resolve">
+			<javac srcdir = "src" includeantruntime = "false">
+			   <classpath location = "lib/*.jar" />
+			</javac>
+	</target>
+	
+	<target name="junit" depends = "compile">
+		
+	 <junit printsummary="yes" haltonfailure="no">
+		<formatter type="brief" usefile="false"/>
+	    <classpath location="lib/junit-4.12.jar" />
+	    <classpath location="test" />
+	    <test name="TestClass"/>
+	 </junit>
+		
+	</target>
+	
+	
+	<target name ="makejar" description="Create a jar for the HW project" depends = "junit">
+		<jar jarfile="HelloAnt.jar" includes="*.class" basedir="bin"/>
+	</target>
+
+	-->
+	
+	<!-- Sets variables which can later be used. --> 
+	<!-- The value of a property is accessed via ${} --> 
+	<property name="src.dir" location="src" /> 
+	<property name="test.dir" location="test" /> 
+	<property name="build.dir" location="bin" /> 
+	<property name="build.test.dir" location="bin/test" /> 
+		
+	<!-- Variables used for JUnit testin --> 
+	<property name="test.report.dir" location="testreport" /> 
+	
+	<!-- Define the classpath which includes the junit.jar and the classes after compiling--> 
+	<path id="junit.class.path"> 
+		<pathelement location="lib/junit-4.12.jar" /> 
+		<pathelement location="lib/hamcrest-core-1.3.jar" />
+		<pathelement location="${build.dir}" />
+		<fileset dir="lib">
+		        <include name="**/*.jar"/>
+		</fileset>
+    </path> 
+	
+	<!-- Deletes the existing build, docs and dist directory--> 
+	<target name="clean"> 
+		<delete dir="${build.dir}" /> 
+		<delete dir="${test.report.dir}" /> 
+	</target> 
+	
+	<!-- Creates the build, docs and dist directory--> 
+	<target name="makedir"> 
+		<mkdir dir="${build.dir}" /> 
+		<mkdir dir="${build.test.dir}" /> 
+		<mkdir dir="${test.report.dir}" /> 
+	</target> 
+	<!--<ivy:cleancache />-->
+	<target name="resolve" description=" retrieve dependencies with ivy">
+		        <ivy:retrieve />
+	</target>
+	
+	<!-- Compiles the java code (including the usage of library for JUnit --> 
+	<target name="compile" depends="clean, makedir, resolve"> 
+		<javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime = "false"> 
+		   <classpath refid="junit.class.path" /> 
+		</javac> 
+		<javac srcdir="${test.dir}" destdir="${build.test.dir}" includeantruntime = "false"> 
+			<classpath refid="junit.class.path" /> 
+		</javac> 
+	</target> 
+	
+	<!-- Run the JUnit Tests --> 
+	<!-- Output is XML, could also be plain--> 
+	<target name="junit" depends="compile"> 
+		<junit printsummary="on" fork="true" haltonfailure="yes">
+			<formatter type="brief" usefile="false"/>
+			<classpath refid="junit.class.path" /> 
+			<classpath> 
+				<pathelement location="${build.test.dir}"/> 
+			</classpath> 
+			<formatter type="xml" /> 
+			<batchtest todir="${test.report.dir}"> 
+				<fileset dir="${test.dir}"> 
+					<include name="**/*Test*.java" /> 
+				</fileset> 
+			</batchtest> 
+		</junit> 
+	</target> 
+	<target name="main" depends="compile, junit"> 
+		<description>Main target</description> 
+	</target>
+	
+</project>

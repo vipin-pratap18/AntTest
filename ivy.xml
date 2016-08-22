@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.    
+-->
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info
+        organisation=""
+        module="AntTest"
+        status="integration">
+	</info>
+	
+	<dependencies>
+        <dependency org="junit" name="junit-dep" rev="4.8.2"/>
+        <dependency org="org.hamcrest" name="hamcrest-core" rev="1.3"/>
+        <dependency org="org.springframework" name="spring-core" rev="4.2.5.RELEASE"/>
+        <!--<dependency org="org.springframework" name="spring-jdbc" rev="3.0.4.RELEASE"/>-->
+        <!--<exclude name='com.springsource.org.apache.derby' /> 
+        <exclude name='com.springsource.org.apache.derby.client' />-->
+        
+        <dependency org = "org.springframework" name="spring-jdbc" rev="3.0.4.RELEASE">
+               <exclude module="com.springsource.org.apache.derby"/>
+               <exclude module="com.springsource.org.apache.derby.client"/>
+        </dependency>
+        <!--<dependency org="org.apache.derby" name="com.springsource.org.apache.derby" rev="10.5.1000001.764942" />
+        <dependency org="org.apache.derby" name="com.springsource.org.apache.derby.client" rev="10.5.1000001.764942" />-->
+        <!--<dependency org="org.eclipse.jdt" name="org.eclipse.jdt.core" rev="3.4.2.v_883_R34x" />-->
+        <!--<dependency org="org.drools" name="drools-api" rev="5.0.1" />-->
+		<!--<dependency org="org.drools" name="drools-compiler" rev="5.0.1"/>-->
+		<dependency org="org.drools" name="drools-core" rev="5.0.1"/>
+		<!--<dependency org="org.drools" name="drools-decisiontables" rev="5.0.1"/>-->
+		<!--<dependency org="org.eclipse.jdt" name="core" rev="3.4.2.v_883_R34x" />-->
+		
+    </dependencies>
+</ivy-module>

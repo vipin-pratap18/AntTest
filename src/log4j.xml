@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<log4j:configuration>
+    <appender name="Appender1" class="org.apache.log4j.ConsoleAppender">
+       <layout class="org.apache.log4j.PatternLayout">
+          <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %X{requestId} [%t] %-5p %c %x - %m%n" />
+       </layout>
+    </appender>
+  
+    <appender name="Appender2" class="org.apache.log4j.FileAppender">
+       <param name="File" value="/home/vipin/applogs/testlog.log" />
+       <layout class="org.apache.log4j.PatternLayout">
+          <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %X{requestId} [%t] %-5p %c %x - %m%n" />
+       </layout>
+    </appender>
+ 
+    <root>
+        <priority value="DEBUG"/>
+        <appender-ref ref="Appender1" />
+        <appender-ref ref="Appender2" />
+    </root>
+     
+</log4j:configuration>
